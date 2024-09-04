@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Branch;
+use App\Models\JobPosition;
+use App\Models\Country;
 
 class NavigationController extends Controller
 {
@@ -93,7 +96,10 @@ class NavigationController extends Controller
 
     public function userOnlineApplication(){
 
-        return view('onlineApplication.index');
+        $branch = Branch::all();
+        $jobPositions = JobPosition::all();
+        $country = Country::all();
+        return view('onlineApplication.index', compact('branch', 'jobPositions', 'country'));
     }
 }
 

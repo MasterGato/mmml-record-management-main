@@ -1,8 +1,13 @@
 <?php
 
+use App\Models\ApplicationInformation;
+use App\Models\Branch;
+use App\Models\Country;
+use Illuminate\Contracts\Queue\Job;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\JobPosition;
 
 return new class extends Migration {
     /**
@@ -16,62 +21,88 @@ return new class extends Migration {
             $table->string('province', 255);
             $table->string('city', 255);
             $table->string('region', 255);
-
         });
-        Schema::create('user', function (Blueprint $table) {
-            $table->id('user_id');
+
+        Schema::create('employee', function (Blueprint $table) {
+            $table->id('employee_id');
             $table->string('first_name', 60);
             $table->string('last_name', 60);
-            $table->string('middle_name', 1)->nullable();
-            $table->string('branch', 20);
-            $table->string('role', 10);
+            $table->string('middle_name', 60)->nullable();
+            $table->string('role', 64);
             $table->string('contact', 255);
             $table->string('email', 255);
-            $table->string('status', 10);
+            $table->string('username', 255);
+            $table->string('password', 255);
+            $table->string('status', 255);
+            $table->foreignIdFor(Branch::class, 'branch_id');
+        });
+
+        Schema::create('country', function (Blueprint $table) {
+            $table->id('country_id');
+            $table->string('country', 100);
         });
 
         Schema::create('job_position', function (Blueprint $table) {
             $table->id('job_id');
             $table->string('job', 255);
+            $table->foreignIdFor(Country::class, 'country_id');
         });
-        Schema::create('country', function (Blueprint $table) {
-            $table->id('country_id');
-            $table->string('country', 100);
 
-        });
-        Schema::create('applicant', function (Blueprint $table) {
+        Schema::create('applicant_information', function (Blueprint $table) {
             $table->id('applicant_id');
-            $table->string('firstName', 60);
-            $table->string('lastName', 60);
-            $table->string('middleName', 255);
+            $table->string('first_name', 60);
+            $table->string('last_name', 60);
+            $table->string('middle_name', 255)->nullable();
             $table->string('gender', 10);
-            $table->string('contactnumber', 255);
+            $table->string('contact_number', 255);
             $table->string('email', 255);
-            $table->date('dob', 20);
+            $table->date('dob');
             $table->string('citizenship', 255);
+            $table->string('region', 255);
             $table->string('province', 255);
             $table->string('city', 255);
             $table->string('brgy', 255);
-            $table->date('applicationdate', 255);
-            $table->string('applicationtype', 20);
-            $table->string('branch', 255);
-            $table->string('controlid', 255);
+            $table->longText('image')->charset('binary');
         });
-        Schema::create('record', function (Blueprint $table) {
+
+        Schema::create('application', function (Blueprint $table) {
+            $table->id('application_id');
+            $table->string('type_of_application', 255);
+            $table->date('date_of_application');
+            $table->string('control_number', 255);
+            $table->string('status', 255);
+            $table->foreignIdFor(ApplicationInformation::class, 'applicant_id');
+            $table->foreignIdFor(Branch::class, 'branch_id');
+            $table->foreignIdFor(JobPosition::class, 'job_id');
+        });
+
+        Schema::create('educational_attainment', function (Blueprint $table) {
+            $table->id('educat_id');
+            $table->string('level', 255);
+            $table->string('institution', 255);
+            $table->string('inclusive_date', 255);
+            $table->string('degree', 255);
+        });
+
+        Schema::create('work_experience', function (Blueprint $table) {
+            $table->id('work_ex_id');
+            $table->string('job_title', 255);
+            $table->string('experience', 255);
+        });
+
+        Schema::create('app_record', function (Blueprint $table) {
             $table->id('record_id');
-            $table->date('datecreated', 255);
-            $table->blob('valid_id');
-            $table->blob('MedCert');
-            $table->blob('MarriageCert')->nullable;
-            $table->blob('birthCert');
-            $table->blob('nbiclearance');
-            $table->blob('passport');
-            $table->blob('Pag-ibig')->nullable;
+            $table->date('date_created');
+            $table->longText('valid_id')->charset('binary');
+            $table->longText('med_cert')->charset('binary');
+            $table->longText('marriage_cert')->charset('binary')->nullable();
+            $table->longText('birth_cert')->charset('binary');
+            $table->longText('nbi_clearance')->charset('binary');
+            $table->longText('passport')->charset('binary');
+            $table->longText('pag_ibig')->charset('binary')->nullable();
         });
     }
-    /**
-     * Reverse the migrations.
-     */
+
     public function down(): void
     {
         //

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\NavigationController;
 
 use Illuminate\Support\Facades\Route;
@@ -41,4 +42,14 @@ Route::get('approval', [NavigationController::class,'userApproval'])->name('appr
 Route::get('landingPage', [NavigationController::class,'userLandingPage'])->name('landingPage');
 
 Route::get('onlineApplication', [NavigationController::class,'userOnlineApplication'])->name('onlineApplication');
+
+
+Route::get('personal-information', [ApplicationController::class,'personalInformation'])->name('personal-information');
+
+Route::post('step-one', [ApplicationController::class,'stepOne'])->name('step-one');
+
+Route::post('step-two', [ApplicationController::class,'stepTwo'])->name('step-two');
+Route::post('step-three', [ApplicationController::class,'stepThree'])->name('step-three');
+
+
 

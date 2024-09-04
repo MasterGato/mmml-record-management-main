@@ -56,7 +56,7 @@
                                     update
                                 </button>
 
-                                
+
                                 <button data-modal-target="delete" data-modal-toggle="delete"
                                     class="bg-gray-700 text-white rounded-md py-1 px-2 hover:bg-yellow-400"
                                     type="button">
