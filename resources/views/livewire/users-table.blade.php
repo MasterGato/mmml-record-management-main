@@ -65,7 +65,8 @@
                                     class="bg-blue-700 hover:bg-blue-800 rounded-lg py-2 px-4 font-semibold text-white">
                                     View
                                 </button>
-                                <button x-data x-on:click="$dispatch('open-modal', {name: 'edit-user'})" wire:click="selectUser({{ $e->employee_id }})"
+                                <button x-data x-on:click="$dispatch('open-modal', {name: 'edit-user'})"
+                                    wire:click="selectUser({{ $e->employee_id }})"
                                     class="bg-green-700 hover:bg-green-800 rounded-lg py-2 px-4 font-semibold text-white">
                                     Update
                                 </button>
@@ -119,8 +120,8 @@
                     </div>
 
                     <div>
-                        <x-text-field.text-field label="Last Name" placeholder="Last Name" model="lastName"
-                            name="lastName" type="text" />
+                        <x-text-field.text-field label="Last Name" placeholder="Last Name" model="lastName" name="lastName"
+                            type="text" />
                         @error('lastName')
                             <p class="text-red-500 text-xs italic mt-1"><i
                                     class="fas fa-exclamation-circle"></i></i>{{ $message }}
@@ -129,8 +130,8 @@
                     </div>
 
                     <div>
-                        <x-text-field.text-field label="Contact Number" placeholder="Contact Number"
-                            model="contactNumber" name="contactNumber" type="text" />
+                        <x-text-field.text-field label="Contact Number" placeholder="Contact Number" model="contactNumber"
+                            name="contactNumber" type="text" />
                         @error('contactNumber')
                             <p class="text-red-500 text-xs italic mt-1"><i
                                     class="fas fa-exclamation-circle"></i></i>{{ $message }}
@@ -140,8 +141,8 @@
 
                     <div>
                         <label for="">Branch</label>
-                        <select class="w-full outline-none border border-slate-200 rounded-lg px-3 py-3"
-                            wire:model="branch" name="branch">
+                        <select class="w-full outline-none border border-slate-200 rounded-lg px-3 py-3" wire:model="branch"
+                            name="branch">
                             <option class="py-2 " value="">Select Branch</option>
                             @foreach ($branches as $branch)
                                 <option class="py-2" value="{{ $branch->branch_id }}">{{ $branch->branch_name }}

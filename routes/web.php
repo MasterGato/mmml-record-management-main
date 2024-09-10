@@ -49,7 +49,8 @@ Route::get('personal-information', [ApplicationController::class,'personalInform
 Route::post('step-one', [ApplicationController::class,'stepOne'])->name('step-one');
 
 Route::post('step-two', [ApplicationController::class,'stepTwo'])->name('step-two');
-Route::post('step-three', [ApplicationController::class,'stepThree'])->name('step-three');
+Route::post('saveApplication', [ApplicationController::class,'saveApplication'])->name('saveApplication');
+Route::get('application-success', [ApplicationController::class,'applicationSuccess'])->name('application-success');
 
 
 

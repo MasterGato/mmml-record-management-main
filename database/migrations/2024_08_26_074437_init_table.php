@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Application;
 use App\Models\ApplicationInformation;
 use App\Models\Branch;
 use App\Models\Country;
@@ -8,7 +9,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\JobPosition;
-
+use App\Models\Applicant;
 return new class extends Migration {
     /**
      * Run the migrations.
@@ -48,7 +49,7 @@ return new class extends Migration {
             $table->foreignIdFor(Country::class, 'country_id');
         });
 
-        Schema::create('applicant_information', function (Blueprint $table) {
+        Schema::create('applicant', function (Blueprint $table) {
             $table->id('applicant_id');
             $table->string('first_name', 60);
             $table->string('last_name', 60);
@@ -62,7 +63,7 @@ return new class extends Migration {
             $table->string('province', 255);
             $table->string('city', 255);
             $table->string('brgy', 255);
-            $table->longText('image')->charset('binary');
+            $table->string('zip_code', 255);
         });
 
         Schema::create('application', function (Blueprint $table) {
@@ -71,7 +72,7 @@ return new class extends Migration {
             $table->date('date_of_application');
             $table->string('control_number', 255);
             $table->string('status', 255);
-            $table->foreignIdFor(ApplicationInformation::class, 'applicant_id');
+            $table->foreignIdFor(Applicant::class, 'applicant_id');
             $table->foreignIdFor(Branch::class, 'branch_id');
             $table->foreignIdFor(JobPosition::class, 'job_id');
         });
@@ -81,26 +82,26 @@ return new class extends Migration {
             $table->string('level', 255);
             $table->string('institution', 255);
             $table->string('inclusive_date', 255);
-            $table->string('degree', 255);
+            $table->foreignIdFor(Applicant::class, 'applicant_id');
         });
 
         Schema::create('work_experience', function (Blueprint $table) {
             $table->id('work_ex_id');
             $table->string('job_title', 255);
             $table->string('experience', 255);
+            $table->foreignIdFor(Applicant::class, 'applicant_id');
         });
 
-        Schema::create('app_record', function (Blueprint $table) {
-            $table->id('record_id');
-            $table->date('date_created');
-            $table->longText('valid_id')->charset('binary');
-            $table->longText('med_cert')->charset('binary');
-            $table->longText('marriage_cert')->charset('binary')->nullable();
-            $table->longText('birth_cert')->charset('binary');
-            $table->longText('nbi_clearance')->charset('binary');
-            $table->longText('passport')->charset('binary');
-            $table->longText('pag_ibig')->charset('binary')->nullable();
+        Schema::create('document', function (Blueprint $table) {
+            $table->id('document_id');
+            $table->longText('doc_file')->charset('binary');
+            $table->string('doc_type', 255);
+            $table->string('doc_uploaded', 255);
+            $table->string('doc_status', 255);
+            $table->foreignIdFor(Application::class, 'application_id');
+
         });
+
     }
 
     public function down(): void
