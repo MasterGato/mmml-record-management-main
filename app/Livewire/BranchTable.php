@@ -54,7 +54,7 @@ class BranchTable extends Component
         $this->selected_branch->updateBranch([
             'branch_name'=> $this->updatebranchName,
             'city'=> $this->updateCity,
-            'province'=> $this->updateProvince,         
+            'province'=> $this->updateProvince,
             'region'=> $this->updateRegion
         ]);
         $this->city = '';
@@ -65,9 +65,9 @@ class BranchTable extends Component
     }
     public function delete($id)
     {
-        Branch::find($id)->delete(); 
-        session()->flash('message', 'Amenities deleted successfully.');  // Flash success message
-        $this->dispatch('close-modal');  // Dispatch an event to close the modal (if applicable)
+        Branch::find($id)->delete();
+        session()->flash('message', 'Amenities deleted successfully.');
+        $this->dispatch('close-modal');
     }
 
 }

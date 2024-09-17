@@ -119,10 +119,15 @@
                     <!-- Gender -->
                     <div>
                         <label for="gender">Gender</label>
-                        <input type="text" name="gender" id="gender"
+
+                        <select type="text" name="gender" id="gender"
                             class="w-full border border-gray-300 rounded-md p-2"
                             value="{{ $applicant->applicant->gender ?? '' }}"
                             @if (isset($applicant->applicant->gender)) readonly @endif>
+
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
                     </div>
 
                     <!-- Contact Number -->
@@ -276,7 +281,9 @@
 
                 <div class="flex justify-between items-center mb-1">
                     <h1 class="text-2xl font-bold mt-5">Work Experience</h1>
-                    <button class="bg-green-600 rounded px-2 py-2 text-white hover:bg-green-800 hover:shadow-lg">
+                    <button type="button"
+                        class="bg-green-600 rounded px-2 py-2 text-white hover:bg-green-800 hover:shadow-lg"
+                        data-modal-target="authentication-modal" data-modal-toggle="authentication-modal">
                         Add Work Experience
                     </button>
                 </div>
@@ -284,7 +291,7 @@
 
                 <div>
 
-                    <table class="w-full">
+                    <table class="w-full" id="work-experience-list">
                         <thead>
                             <tr class="bg-slate-50 font-bold">
                                 <th>
@@ -302,39 +309,122 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center ">
-                                <td class="py-2">
-                                    <button
-                                        class="bg-red-600 rounded-full px-2 py-1 text-white hover:bg-red-800 hover:shadow-lg">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </button>
-                                </td>
-                                <td class="py-2">
-                                    <p>Philippine</p>
-                                </td>
-                                <td class="py-2">
-                                    <p>Mid Wife</p>
-                                </td>
-                                <td class="py-2">
-                                    <p>2020-2021</p>
-                                </td>
-                            </tr>
+                        </tbody>
                     </table>
 
 
                 </div>
-
-
-
                 <div class="flex justify-end gap-2 mt-5">
                     <a href=""
                         class="bg-blue-700 hover:bg-blue-800 rounded-lg py-2 px-4 font-semibold text-white">Back</a>
                     <button type="submit"
                         class="bg-blue-700 hover:bg-blue-800 rounded-lg py-2 px-4 font-semibold text-white">Next</button>
                 </div>
+            </form>
         </div>
     </div>
-    </form>
+
+    <div id="authentication-modal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Add Work Experience
+                    </h3>
+                    <button type="button"
+                        class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-hide="authentication-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-4 md:p-5">
+
+                    <div>
+                        <label for="country"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Country</label>
+                        <input type="country" name="country" id="country"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="Enter Country" required />
+                    </div>
+                    <div>
+                        <label for="work"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Work</label>
+                        <input type="work" name="work" id="work"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                            placeholder="Enter Work" required />
+                    </div>
+                    <div>
+                        <label for="year"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Year</label>
+                        <input type="date" name="year" id="year" placeholder="Enter Date"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                            required />
+                    </div>
+
+                    <button type="button" id="add-work-experience"
+                        class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add
+                        Work Experience</button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.getElementById('add-work-experience').addEventListener('click', function() {
+            // Get the form values
+            var country = document.getElementById('country').value;
+            var work = document.getElementById('work').value;
+            var year = document.getElementById('year').value;
+
+            // Validate the inputs
+            if (country === '' || work === '' || year === '') {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            // Create a new row and cells
+            var table = document.getElementById('work-experience-list').getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow();
+
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+
+            cell1.className = 'text-center'; // Center the cell content
+            cell2.className = 'text-center'; // Center the cell content
+            cell3.className = 'text-center'; // Center the cell content
+            cell4.className = 'text-center';
+
+            cell1.innerHTML =
+                '<button class="bg-red-600 rounded-full px-2 py-1 text-white hover:bg-red-800 hover:shadow-lg"><i class="fa fa-trash" aria-hidden="true"></i></button>';
+            cell2.innerHTML =
+                '<input type="text" name="country[]" class="bg-inherit outline-none border-0 rounded-lg px-3 py-3 focus:outline-none text-center" readonly value="' +
+                country + '">';
+            cell3.innerHTML =
+                '<input type="text" name="work[]" class="bg-inherit outline-none border-0 rounded-lg px-3 py-3 focus:outline-none text-center" readonly value="' +
+                work + '">';
+            cell4.innerHTML =
+                '<input type="text" name="year[]" class="bg-inherit outline-none border-0 rounded-lg px-3 py-3 focus:outline-none text-center" readonly value="' +
+                year + '">';
+
+
+        });
+    </script>
+
+
 
 </body>
 

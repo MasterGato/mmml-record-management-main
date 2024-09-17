@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Branch extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     public $timestamps = false;
     protected $table = 'branch';
     protected $primaryKey = 'branch_id';
@@ -20,5 +22,5 @@ class Branch extends Model
             ->orWhere('city', 'like', '%'.$value.'%')
             ->orWhere('region', 'like', '%'.$value.'%');
     }
-    
+
 }

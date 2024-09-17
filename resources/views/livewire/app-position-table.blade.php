@@ -42,18 +42,18 @@
                 </thead>
                 <tbody>
                     @foreach ($jobPositions as $job)
-                    <tr class="text-center">
-                        <td class="py-2 px-4 border-b border-gray-300">{{$job->job_id}}</td>
-                        <td class="py-2 px-4 border-b border-gray-300">{{$job->job}}</td>
-                        <td class="py-2 px-4 border-b border-gray-300">{{$job->country->country}}</td>
-                        <td class="py-2 px-4 border-b border-gray-300">
-                            <button class="bg-blue-700 hover:bg-blue-800 text-white rounded-lg py-1 px-3"
-                            wire:click="selectJob({{$job->job_id}})"
-                            x-data x-on:click="$dispatch('open-modal', {name: 'update-job-position'})">Update</button>
-                            <button class="bg-red-700 hover:bg-red-800 text-white rounded-lg py-1 px-3"
-                            wire:click="deleteJob({{$job->job_id}})">Delete</button>
-                        </td>
-                    </tr>
+                        <tr class="text-center">
+                            <td class="py-2 px-4 border-b border-gray-300">{{ $job->job_id }}</td>
+                            <td class="py-2 px-4 border-b border-gray-300">{{ $job->job }}</td>
+                            <td class="py-2 px-4 border-b border-gray-300">{{ $job->country->country }}</td>
+                            <td class="py-2 px-4 border-b border-gray-300">
+                                <button class="bg-blue-700 hover:bg-blue-800 text-white rounded-lg py-1 px-3"
+                                    wire:click="selectJob({{ $job->job_id }})" x-data
+                                    x-on:click="$dispatch('open-modal', {name: 'update-job-position'})">Update</button>
+                                <button class="bg-red-700 hover:bg-red-800 text-white rounded-lg py-1 px-3"
+                                    wire:click="deleteJob({{ $job->job_id }})">Delete</button>
+                            </td>
+                        </tr>
                     @endforeach
 
                 </tbody>
@@ -103,7 +103,7 @@
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
                 </div>
             </form>
-            @endslot
+        @endslot
 
     </x-modal.modal>
 
@@ -126,10 +126,10 @@
 
 
                     <div class="w-1/2">
-                        <label for="">Branch</label>
+                        <label for="">Country</label>
                         <select class="w-full outline-none border border-slate-200 rounded-lg px-3 py-3"
                             wire:model="country" name="country">
-                            <option class="py-2 " value="">Select Branch</option>
+                            <option class="py-2 " value="">Select Country</option>
                             @foreach ($countries as $country)
                                 <option class="py-2" value="{{ $country->country_id }}">{{ $country->country }}
                                 </option>
@@ -143,13 +143,20 @@
                         @enderror
                     </div>
                 </div>
+                @if (session()->has('message'))
+                    <div class="text-green-800 bg-green-50 px-2 py-2 my-2 rounded-lg">
+                        {{ session('message') }}
+                    </div>
+                @endif
+
                 <div class="col-span-2 flex justify-end mt-2">
+
 
                     <button type="submit"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
                 </div>
             </form>
-            @endslot
+        @endslot
 
     </x-modal.modal>
 

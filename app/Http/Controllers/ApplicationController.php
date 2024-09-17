@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redis;
 use App\Models\Applicant;
 use App\Models\Application;
 use App\Models\EducationAttainment;
+use App\Models\WorkExperience;
 
 class ApplicationController extends Controller
 {
@@ -42,7 +43,6 @@ class ApplicationController extends Controller
         ]]);
 
         return redirect()->route('personal-information');
-
     }
 
     public function personalInformation()
@@ -56,8 +56,6 @@ class ApplicationController extends Controller
 
 
         $data = $request->all();
-
-
 
         $firstName = $data['first_name'];
         $middleName = $data['middle_name'];
@@ -73,7 +71,7 @@ class ApplicationController extends Controller
         $region = $data['region'];
 
         $elementaryYear = $data['elementary_year'];
-        $elementarySchool= $data['elementary_school'];
+        $elementarySchool = $data['elementary_school'];
         $highschoolYear = $data['highschol_year'];
         $highschoolSchool = $data['highschool_school'];
         $collegeYear = $data['college_year'];
@@ -107,6 +105,23 @@ class ApplicationController extends Controller
         $applicant->region = $region;
         $applicant->save();
 
+        // $workExperience = new WorkExperience();
+
+        // $countries = $request->input('country');
+        // $works = $request->input('work');
+        // $years = $request->input('year');
+
+
+        // foreach ($countries as $index => $country) {
+        //     $workExperience = new WorkExperience();
+        //     $workExperience->applicant_id = $applicant->id;
+        //     $workExperience->country = $country;
+        //     $workExperience->work = $works[$index] ?? null;
+        //     $workExperience->year = $years[$index] ?? null;
+        //     $workExperience->save();
+        // }
+
+
         $application = new Application();
         $application->applicant_id = $applicant->applicant_id;
         $application->branch_id = session('application')['branch'];
@@ -139,18 +154,17 @@ class ApplicationController extends Controller
         $education->save();
 
         return redirect()->route('application-success');
-
     }
 
-    public function searchApplication(Request $request){
+    public function searchApplication(Request $request)
+    {
         $controlNumber = $request->control_number;
 
         $applicant = Application::where('control_number', $controlNumber)->first();
-        if($applicant){
+        if ($applicant) {
             return view('onlineApplication.personal-information', compact(['applicant', 'controlNumber']));
-        }else{
+        } else {
             return redirect()->back()->with('error', 'Control Number not found')->withInput();
-
         }
     }
 

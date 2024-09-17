@@ -22,6 +22,8 @@ return new class extends Migration {
             $table->string('province', 255);
             $table->string('city', 255);
             $table->string('region', 255);
+            $table->softDeletes();
+
         });
 
         Schema::create('employee', function (Blueprint $table) {

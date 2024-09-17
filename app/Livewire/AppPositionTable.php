@@ -43,6 +43,7 @@ class AppPositionTable extends Component
 
     public function selectJob($id){
         $job = JobPosition::find($id);
+        $this->selectedJob = $job;
         $this->jobPosition = $job->job;
         $this->country = $job->country_id;
     }
@@ -58,6 +59,7 @@ class AppPositionTable extends Component
             'job' => $this->jobPosition,
             'country_id' => $this->country,
         ]);
+        session()->flash('message', 'Job Position Updated Successfully.');
     }
 
     public function deleteJob($id){

@@ -119,12 +119,14 @@ class UsersTable extends Component
 
         $this->username = '';
         $this->password = '';
+        $this->email = '';
         $this->firstName = '';
         $this->lastName = '';
         $this->middleName = '';
         $this->branch = '';
         $this->role = '';
         $this->contactNumber = '';
+        session()->flash('message', 'User Updated Successfully');
     }
 
     public function activateUser($id){

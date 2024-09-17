@@ -220,7 +220,13 @@
 
     <x-modal.modal name="edit-user" title="Update User">
         @slot('body')
-            <form wire:submit.prevent="save">
+            <form wire:submit.prevent="update">
+                @if (session()->has('message'))
+                    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
+                        <p>{{ session('message') }}</p>
+                    </div>
+
+                @endif
                 <div class="grid grid-cols-2 gap-2">
                     <div>
                         <x-text-field.text-field label="First Name" placeholder="First Name" model="firstName"
@@ -331,7 +337,7 @@
                     <div class="col-span-2 flex justify-end">
 
                         <button type="submit"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
                     </div>
                 </div>
             </form>
