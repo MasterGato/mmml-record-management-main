@@ -178,75 +178,8 @@
                 <button
                     class="h-10 ml-2 px-4 border-none rounded-md bg-gray-700 text-white hover:bg-yellow-400">Search</button>
 
-                <!-- Dropdown Buttons -->
-                <div class="relative ml-2">
-                    <input type="checkbox" id="sortToggle1" class="peer hidden" />
-                    <label for="sortToggle1"
-                        class="h-10 px-4 border-none rounded-md bg-gray-700 text-white hover:bg-yellow-400 flex items-center cursor-pointer">
-                        Select Branch
-                        <svg class="inline-block w-5 h-5 ml-2 -mr-1" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </label>
-                    <div
-                        class="absolute right-0 mt-1 w-full max-w-[10rem] bg-white border border-gray-300 rounded-md shadow-lg peer-checked:block hidden">
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                            onclick="filterTable('')">All Branches</a>
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                            onclick="filterTable('Gensan')">Gensan</a>
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                            onclick="filterTable('Isulan')">Isulan</a>
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                            onclick="filterTable('Koronadal')">Koronadal</a>
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                            onclick="filterTable('Polomolok')">Polomolok</a>
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                            onclick="filterTable('Surallah')">Surallah</a>
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                            onclick="filterTable('Tacurong')">Tacurong</a>
-                    </div>
-                </div>
 
-                <!-- Second Dropdown Button -->
-                <div class="relative ml-2">
-                    <input type="checkbox" id="sortToggle2" class="peer hidden" />
-                    <label for="sortToggle2"
-                        class="h-10 px-4 border-none rounded-md bg-gray-700 text-white hover:bg-yellow-400 flex items-center cursor-pointer">
-                        Type of Applicant Status
-                        <svg class="inline-block w-5 h-5 ml-2 -mr-1" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </label>
-                    <div
-                        class="absolute right-0 mt-1 w-full max-w-[10rem] bg-white border border-gray-300 rounded-md shadow-lg peer-checked:block hidden">
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Document
-                            Submission</a>
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Waiting to be
-                            Hired</a>
-                    </div>
-                </div>
 
-                <div class="absolute right-5">
-                    <input type="checkbox" id="sortToggle" class="peer hidden" />
-                    <label for="sortToggle"
-                        class="h-10 px-4 border-none rounded-md bg-gray-700 text-white hover:bg-yellow-400 flex items-center cursor-pointer">
-                        Sort By
-                        <svg class="inline-block w-5 h-5 ml-2 -mr-1" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </label>
-                    <div
-                        class="absolute right-0 mt-1 w-full max-w-[10rem] bg-white border border-gray-300 rounded-md shadow-lg peer-checked:block hidden">
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">A-Z</a>
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Z-A</a>
-                    </div>
-                </div>
             </div>
 
             <!-- Tables -->
@@ -254,39 +187,7 @@
 
             @livewire('approval-table')
 
-            <div id="encode-control-number-table" class="hidden">
-                <table class="w-full border-collapse bg-white">
-                    <thead class="bg-yellow-400 text-gray-600 uppercase text-xs leading-normal">
-                        <tr>
-                            <th class="py-3 px-6 text-center">Applicant ID</th>
-                            <th class="py-3 px-6 text-center">Applicant Name</th>
-                            <th class="py-3 px-6 text-center">Branch</th>
-                            <th class="py-3 px-6 text-center">Type of Application</th>
-                            <th class="py-3 px-6 text-center">Date of Application</th>
-                            <th class="py-3 px-6 text-center">Contact Number</th>
-                            <th class="py-3 px-6 text-center">Position</th>
-                            <th class="py-3 px-6 text-center">Applied Country</th>
-                            <th class="py-3 px-6 text-center">Applicant Status</th>
-                            <th class="py-3 px-6 text-center">Control Number</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-600 text-sm font-light">
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-6 text-center">1</td>
-                            <td class="py-3 px-6 text-center">John Smith</td>
-                            <td class="py-3 px-6 text-center">Koronadal</td>
-                            <td class="py-3 px-6 text-center">New Applicant</td>
-                            <td class="py-3 px-6 text-center">08-10-2024</td>
-                            <td class="py-3 px-6 text-center">09123456789</td>
-                            <td class="py-3 px-6 text-center">House Keeper</td>
-                            <td class="py-3 px-6 text-center">Kuwait</td>
-                            <td class="py-3 px-6 text-center">Pending</td>
-                            <td class="py-3 px-6 text-center">CN-123456</td>
-                        </tr>
-                        <!-- Repeat similar rows as needed -->
-                    </tbody>
-                </table>
-            </div>
+
 
             <script>
                 // Initialize default tab

@@ -52,5 +52,5 @@ Route::post('step-two', [ApplicationController::class,'stepTwo'])->name('step-tw
 Route::post('saveApplication', [ApplicationController::class,'saveApplication'])->name('saveApplication');
 Route::get('application-success', [ApplicationController::class,'applicationSuccess'])->name('application-success');
 
-
+Route::post('searchApplication', [ApplicationController::class,'searchApplication'])->name('searchApplication');
 

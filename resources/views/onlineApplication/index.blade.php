@@ -48,20 +48,12 @@
                     <legend class="text-lg font-semibold">3. Position Applying For</legend>
                     <select class="w-full py-2 px-3 border border-gray-300 rounded-md" name="position">
                         @foreach ($jobPositions as $job)
-                            <option value="{{$job->job_id}}">{{$job->job}}</option>
+                            <option value="{{$job->job_id}}">{{$job->job  ." - ". $job->country->country}}</option>
                         @endforeach
                     </select>
                 </div>
 
-                <div class="flex-1">
-                    <legend class="text-lg font-semibold">Country of Choice</legend>
-                    <select class="w-full py-2 px-3 border border-gray-300 rounded-md" name="country">
-                        @foreach ($country as $c)
-                            <option value="{{$c->country_id}}">{{$c->country}}</option>
-                        @endforeach
 
-                    </select>
-                </div>
             </fieldset>
 
             <div class="flex justify-end gap-2">

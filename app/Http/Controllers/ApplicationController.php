@@ -22,12 +22,11 @@ class ApplicationController extends Controller
         $applicantType = $data['applicantType'];
         $branch = $data['branch'];
         $position = $data['position'];
-        $country = $data['country'];
 
 
         $branch_name = Branch::where('branch_id', $branch)->first();
 
-        $country_name = Country::where('country_id', $country)->first();
+
 
         $job_positions = JobPosition::where('job_id', $position)->first();
 
@@ -38,11 +37,12 @@ class ApplicationController extends Controller
             'branch_name' => $branch_name->branch_name,
             'position' => $position,
             'position_name' => $job_positions->job,
-            'country' => $country,
-            'country_name' => $country_name->country,
+            'country' => $job_positions->country->country_id,
+            'country_name' => $job_positions->country->country,
         ]]);
 
         return redirect()->route('personal-information');
+
     }
 
     public function personalInformation()
@@ -79,6 +79,17 @@ class ApplicationController extends Controller
         $collegeYear = $data['college_year'];
         $collegeSchool = $data['college_school'];
 
+        $request->validate([
+            'elementary_year' => 'required|date|before_or_equal:today',
+            'elementary_school' => 'required|string|max:255',
+            'highschol_year' => 'required|date|before_or_equal:today',
+            'highschool_school' => 'required|string|max:255',
+            'college_year' => 'required|date|before_or_equal:today',
+            'college_school' => 'required|string|max:255',
+        ]);
+
+
+
 
         $applicant = new Applicant();
         $applicant->first_name = $firstName;
@@ -100,7 +111,7 @@ class ApplicationController extends Controller
         $application->applicant_id = $applicant->applicant_id;
         $application->branch_id = session('application')['branch'];
         $application->job_id = session('application')['position'];
-        $application->control_number = $this->generateControlNumber();
+        $application->control_number = "";
         $application->status = "Pending";
         $application->type_of_application = session('application')['applicantType'];
         $application->date_of_application = date('Y-m-d');
@@ -129,6 +140,18 @@ class ApplicationController extends Controller
 
         return redirect()->route('application-success');
 
+    }
+
+    public function searchApplication(Request $request){
+        $controlNumber = $request->control_number;
+
+        $applicant = Application::where('control_number', $controlNumber)->first();
+        if($applicant){
+            return view('onlineApplication.personal-information', compact(['applicant', 'controlNumber']));
+        }else{
+            return redirect()->back()->with('error', 'Control Number not found')->withInput();
+
+        }
     }
 
     public function applicationSuccess()

@@ -32,9 +32,7 @@
                     <tr>
                         <th class="py-2 px-4 border-b border-gray-300 text-center">Branch ID</th>
                         <th class="py-2 px-4 border-b border-gray-300 text-center">Branch Name</th>
-                        <th class="py-2 px-4 border-b border-gray-300 text-center">MUNICIPALITY/CITY</th>
-                        <th class="py-2 px-4 border-b border-gray-300 text-center">PROVINCE</th>
-                        <th class="py-2 px-4 border-b border-gray-300 text-center">REGION</th>
+                        <th class="py-2 px-4 border-b border-gray-300 text-center">Address</th>
                         <th class="py-2 px-4 border-b border-gray-300 text-center">ACTION</th>
                     </tr>
                 </thead>
@@ -44,9 +42,7 @@
                         <tr class="text-center">
                             <td class="py-2 px-4 border-b border-gray-300">{{ $branch->branch_id }}</td>
                             <td class="py-2 px-4 border-b border-gray-300">{{ $branch->branch_name }}</td>
-                            <td class="py-2 px-4 border-b border-gray-300">{{ $branch->city }}</td>
-                            <td class="py-2 px-4 border-b border-gray-300">{{ $branch->province }}</td>
-                            <td class="py-2 px-4 border-b border-gray-300">{{ $branch->region }}</td>
+                            <td class="py-2 px-4 border-b border-gray-300">{{ $branch->city ." ".$branch->province ." ". $branch->region }}</td>
                             <td class="py-2 px-4 border-b border-gray-300">
 
 
@@ -100,7 +96,8 @@
 
     <div id="medium-modal" tabindex="-1"
         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div class="relative w-full max-w-lg max-h-full">
+        <div class="relative w-full max-w-lg max-h-full"
+        wire:ignore.self>
 
 
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">

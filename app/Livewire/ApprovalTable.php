@@ -14,7 +14,7 @@ class ApprovalTable extends Component
         return view(
             'livewire.approval-table',
             [
-                'applications' => Application::search($this->search)->where('status', 'Pending')->get()
+                'applications' => Application::search($this->search)->get()
             ]
         );
     }
